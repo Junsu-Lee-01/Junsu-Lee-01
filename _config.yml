@@ -6,10 +6,10 @@ highlighter:      rouge     # pygments 대신 rouge 권장
 permalink:        pretty
 
 # Setup
-title:            "Derrick Lee's Portfolio"
+title:            "Junsu Lee"
 tagline:          'A Jekyll theme'
 description:      'Derrick Lee의 포트폴리오 사이트입니다.'
-url:              "https://derricklee1008.github.io"
+url:              "https://Junsu-Lee-01.github.io"
 baseurl:          "" # 이 부분을 반드시 비워주세요
 
 author:
