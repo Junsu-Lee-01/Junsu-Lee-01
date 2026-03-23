@@ -1,30 +1,35 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about" style="text-align: center;">
-      <img src="{{ site.baseurl }}/public/profile.jpg" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
-      
+      <div style="margin-bottom: 1.5rem;">
+        <img src="{{ site.baseurl }}/public/profile.jpg" 
+             style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.2); display: block; margin: 0 auto;">
+      </div>
       <h1>
-        <a href="{{ site.baseurl }}/">
+        <a href="{{ site.baseurl }}/" style="font-size: 1.8rem;">
           {{ site.title }}
         </a>
       </h1>
-      <p class="lead" style="font-size: 0.9rem; opacity: 0.8;">{{ site.description }}</p>
+      <p class="lead" style="font-size: 0.95rem; opacity: 0.8; margin-top: 0.5rem;">
+        {{ site.description }}
+      </p>
       
-      <div style="font-size: 0.8rem; margin-top: 1rem; line-height: 1.6;">
-        <p>✉️ leejunsu3064@gmail.com</p> <p>🔗 <a href="https://linkedin.com/in/derrick-junsu-lee" target="_blank" style="color: #fff; text-decoration: underline;">LinkedIn</a></p>
+      <div style="font-size: 0.85rem; margin-top: 1.5rem; line-height: 1.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+        <p style="margin-bottom: 0.3rem;">✉️ <a href="mailto:leejunsu3064@gmail.com" style="color: #fff;">leejunsu3064@gmail.com</a></p>
+        <p>🔗 <a href="https://linkedin.com/in/derrick-junsu-lee" target="_blank" style="color: #fff; text-decoration: underline;">LinkedIn Profile</a></p>
       </div>
     </div>
 
-    <nav class="sidebar-nav" style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-      <a class="sidebar-nav-item" href="#about">About</a>
-      <a class="sidebar-nav-item" href="#experience">Experience</a>
-      <a class="sidebar-nav-item" href="#projects">Projects</a>
-      <a class="sidebar-nav-item" href="#skills">Skills</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}" target="_blank">GitHub</a>
+    <nav class="sidebar-nav" style="margin-top: 2rem;">
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/#about">About</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/#experience">Experience</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/#projects">Projects</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/#skills">Skills</a>
+      <a class="sidebar-nav-item" href="{{ site.github.repo }}" target="_blank" style="margin-top: 1rem; opacity: 0.6;">GitHub</a>
     </nav>
 
-    <p style="text-align: center; font-size: 0.7rem; margin-top: 2rem; opacity: 0.5;">
-      &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}.
+    <p style="text-align: center; font-size: 0.75rem; margin-top: 3rem; opacity: 0.4;">
+      &copy; {{ site.time | date: '%Y' }} {{ site.title }}.
     </p>
   </div>
 </div>
