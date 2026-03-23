@@ -9,7 +9,7 @@ permalink:        pretty
 title:            "Junsu Lee"
 tagline:          'A Jekyll theme'
 description:      'Derrick Lee의 포트폴리오 사이트입니다.'
-url:              "https://Junsu-Lee-01.github.io"
+url:              "https://junsu-lee-01.github.io"
 baseurl:          "" # 이 부분을 반드시 비워주세요
 
 author:
