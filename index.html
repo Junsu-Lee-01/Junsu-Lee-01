@@ -9,6 +9,8 @@ layout: null
     <title>Junsu Lee — Industrial & System Engineer</title>
     <link rel="icon" type="image/png" href="{{ site.baseurl }}/public/logo.png">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -54,6 +56,11 @@ layout: null
         .contact-item { display: flex; align-items: center; gap: 10px; font-size: 12px; color: rgba(240,237,231,.7); text-decoration: none; margin-bottom: 12px; transition: color .2s }
         .contact-item:hover { color: var(--sb-accent) }
         
+        /* 링크드인 아이콘 크기 최적화 */
+        .linkedin-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(240,237,231,.7); text-decoration: none; transition: color .2s }
+        .linkedin-link:hover { color: var(--sb-accent); }
+        .linkedin-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        
         .nav-link { display: block; padding: 10px 14px; font-size: 13px; font-weight: 500; color: rgba(240,237,231,.5); text-decoration: none; border-radius: 8px; transition: all .2s }
         .nav-link:hover, .nav-link.active { color: var(--sb-accent); background: rgba(255,255,255,.05) }
 
@@ -86,11 +93,37 @@ layout: null
         .bullet-list li { position: relative; padding-left: 18px; font-size: 14px; color: var(--ink-light); margin-bottom: 6px }
         .bullet-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-        .tag { font-size: 11px; font-weight: 600; color: var(--ink-faint); background: var(--card-hover); padding: 4px 10px; border-radius: 6px; margin-right: 6px }
+        /* ── 기술 스택 (세로 정렬로 변경) ── */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .skill-category {
+            font-size: 10px;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .skill-item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skill-item {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--ink-light);
+            display: block;
+        }
 
         @media(max-width: 900px) {
             .sidebar { display: none }
             .main-content { margin-left: 0; padding: 60px 24px }
+            .skill-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -115,7 +148,13 @@ layout: null
 
             <div style="margin-top: 20px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,.1);">
                 <a href="mailto:leejunsu3064@gmail.com" class="contact-item">✉ leejunsu3064@gmail.com</a>
-                <a href="https://linkedin.com/in/derrick-junsu-lee" target="_blank" class="contact-item">🔗 LinkedIn Profile</a>
+                
+                <a href="https://linkedin.com/in/derrick-junsu-lee" target="_blank" class="linkedin-link">
+                    <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="currentColor"/>
+                    </svg>
+                    <span>LinkedIn Profile</span>
+                </a>
             </div>
 
             <nav style="margin-top: 24px;" class="sidebar-nav">
@@ -151,65 +190,86 @@ layout: null
 
         <section id="skills" class="content-section">
             <div class="section-header"><h2 class="section-title" id="t-skill">Skills</h2><div class="section-line"></div></div>
-            <div id="skill-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;"></div>
+            <div id="skill-list" class="skill-grid"></div>
         </section>
     </main>
 
     <script>
-        // ── 데이터 객체 (준수님 PDF 기반) ──
+        // ── 데이터 객체 (준수님 PDF 기반으로 상세 내용 복원) ──
         const D = {
             info: {
                 name: { en: "Junsu Lee", kr: "이준수" },
-                role: { en: "Industrial & System Engineer", kr: "산업시스템공학도 / 백엔드 개발자" },
+                role: { en: "Industrial & System Engineer", kr: "산업경영공학도 / 백엔드 개발자" },
                 about: {
-                    en: "Binghamton University ISE student focusing on data-driven system optimization and backend architecture. Experienced in managing AI-OCR pipelines, manufacturing quality systems, and RAG-based AI backends.",
-                    kr: "데이터 기반 시스템 최적화와 백엔드 아키텍처에 집중하는 빙엄턴 대학교 산업경영공학생입니다. AI-OCR 파이프라인 관리, 제조 품질 시스템 최적화, RAG 기반 AI 백엔드 구축 등 폭넓은 경험을 보유하고 있습니다."
+                    en: "I am an **Industrial and Systems Engineering** student at Binghamton University with a strong focus on data-driven system optimization and backend architecture. My experience ranges from managing AI-OCR pipelines and optimizing manufacturing quality systems to architecting RAG-based AI backends. I enjoy analyzing complex problems through an engineering lens to deliver efficient, scalable solutions.",
+                    kr: "데이터 기반 시스템 최적화와 백엔드 아키텍처에 집중하는 빙엄턴 대학교 산업경영공학생입니다. AI-OCR 파이프라인 관리, 제조 품질 시스템 최적화, RAG 기반 AI 백엔드 구축 등 폭넓은 실무 경험을 보유하고 있으며, 복잡한 문제를 공학적 관점에서 분석하여 효율적인 솔루션을 도출하는 것을 즐깁니다."
                 }
             },
             education: [{
                 period: "Expected May 2027",
                 school: { en: "Binghamton University (SUNY)", kr: "뉴욕주립대 빙엄턴 (SUNY)" },
-                degree: { en: "B.S. in Industrial and Systems Engineering", kr: "산업시스템공학 학사" },
-                desc: { en: "GPA: 3.67/4.00 | Honors: Alpha Pi Mu, Dean's List", kr: "학점: 3.67/4.00 | Alpha Pi Mu 명예 협회, 성적 우수 장학생" }
+                degree: { en: "B.S. in Industrial and Systems Engineering", kr: "산업경영공학 학사" },
+                desc: { 
+                    en: "GPA: 3.67/4.00 | Honors: Alpha Pi Mu, Dean's List (Fall 2020 - Fall 2021) | Awards: 3rd Place - IISE Technical Paper Competition, 3rd Place - National Wind Power Forecasting Competition<br><strong style='color:var(--ink)'>Relevant Coursework:</strong> Probabilistic Systems, DOE, Human Factors, Engineering Economics, Engineering Computing", 
+                    kr: "학점: 3.67/4.00 | Alpha Pi Mu 명예 협회, 성적 우수 장학생 (2020 가을 - 2021 가을) | 수상: IISE 기술 논문 경진대회 전국 3위, 전국 풍력 발전량 예측 경진대회 3위<br><strong style='color:var(--ink)'>관련 교과목:</strong> 확률 시스템, 실험계획법(DOE), 인간 공학, 공학 경제학, 공학 컴퓨팅" 
+                }
             }],
             experience: [
                 {
                     period: "Sep 2025 - Nov 2025",
                     company: { en: "DP Architect", kr: "DP Architect" },
                     role: { en: "Backend Developer (Freelance)", kr: "백엔드 개발자 (프리랜서)" },
+                    location: { en: "Singapore", kr: "싱가포르" },
                     desc: {
-                        en: "Designed RAG-based document retrieval for blueprints. Built RabbitMQ message queuing for scalability.",
-                        kr: "건축 도면의 RAG 기반 문서 검색 백엔드 설계. 확장성을 위한 RabbitMQ 메시지 큐 시스템 구축."
+                        en: "<ul class='bullet-list'><li>Problem: Architects were manually searching through blueprints, a slow and error-prone process.</li><li>Action: Designed backend for an AI chatbot, engineering SQL schemas and classification rules for complex blueprint abbreviations to enable structured RAG-based document retrieval. Architected RabbitMQ for scalability.</li><li>Result: Delivered a functional prototype, significantly reducing manual lookup time.</li></ul>",
+                        kr: "<ul class='bullet-list'><li>문제: 건축가들이 수동으로 도면을 검색하는 비효율적이고 오류가 발생하기 쉬운 프로세스를 해결하고자 함.</li><li>해결 및 성과: AI 챗봇 백엔드를 설계하고 복잡한 도면 약어에 대한 SQL 스키마 및 분류 규칙을 생성하여 구조화된 RAG 기반 문서 검색을 구현함. 확장성을 위한 RabbitMQ 아키텍처 구축.</li></ul>"
                     }
                 },
                 {
                     period: "Feb 2020 - Aug 2024",
                     company: { en: "Songjee Tech", kr: "송지테크 (Songjee Tech)" },
                     role: { en: "Quality Engineer Manager", kr: "품질 엔지니어 매니저" },
+                    location: { en: "South Korea", kr: "대한민국" },
                     desc: {
-                        en: "Managed 50+ Bruker spectrometers. Improved photon counting by 2-10x through hardware diagnostics.",
-                        kr: "50개 이상의 Bruker 분광기 교정 및 관리. 하드웨어 진단을 통해 광자 계수치 2~10배 개선."
+                        en: "<ul class='bullet-list'><li>Managed 50+ Bruker spectrometers, maintaining production line uptime and analytical reliability for diverse materials (Al, Cu, Fe, STS).</li><li> Improved photon counting by 2-10x through systematic hardware diagnostics, assessed vacuum level and contamination to reduce analytical variance <3.</li></ul>",
+                        kr: "<ul class='bullet-list'><li>50개 이상의 Bruker 분광분석기를 관리하며, 알루미늄, 구리, 철, 스테인리스강 등 다양한 자재의 생산 라인에 맞춰 분석 신뢰성을 유지했음.</li><li>하드웨어 진단을 통해 광자 계수치를 2~10배 개선하고, 진공 수준 및 오염을 평가하여 분석 분산을 3 미만으로 줄임.</li><li>"
+                    }
+                },
+                {
+                    period: "Feb 2020 - Jun 2020",
+                    company: { en: "AKUO Digital", kr: "AKUO Digital" },
+                    role: { en: "AI-OCR Data Training Manager", kr: "AI-OCR 데이터 트레이닝 매니저" },
+                    location: { en: "South Korea", kr: "대한민국" },
+                    desc: {
+                        en: "<ul class='bullet-list'><li>Managed end-to-end document digitization pipeline for an enterprise AI-OCR project.</li><li>Action: Improved OCR accuracy by correcting misreadings and preprocessing low-clarity documents.</li><li>Result: Tracked and ensured on-schedule delivery of labeling targets using Excel.</li></ul>",
+                        kr: "<ul class='bullet-list'><li>기업형 AI-OCR 프로젝트의 엔드투엔드 문서 디지털화 파이프라인을 관리해야 했음.</li><li>잘못 읽은 부분을 수정하고 불명확한 문서를 전처리하여 OCR 정확도를 향상시킴.</li><li>엑셀을 사용하여 라벨링 목표의 일정 준수 여부를 추적하고 보장함.</li></ul>"
                     }
                 }
             ],
             projects: [
                 {
                     period: "2025",
-                    name: { en: "National Wind Power Forecasting", kr: "전국 풍력 발전량 예측 경진대회" },
+                    name: { en: "National Wind Power Forecasting Competition", kr: "전국 풍력 발전량 예측 경진대회" },
                     role: { en: "Team Leader (3rd Place)", kr: "팀장 (전국 3위 수상)" },
-                    desc: { en: "Developed predictive model using LightGBM, improving accuracy by 8%.", kr: "LightGBM 기반 예측 모델 개발을 통해 정확도 8% 향상 달성." }
+                    desc: { en: "<ul class='bullet-list'><li>Action: Led end-to-end forecasting pipeline, implementing advanced feature engineering on complex datasets and developing a high-accuracy predictive model using LightGBM.</li><li>Result: Achieved 3rd place out of 160 teams, improving accuracy by 8%.</li></ul>", kr: "<ul class='bullet-list'><li>해결: 엔드투엔드 예측 파이프라인을 주도하여 복잡한 데이터셋에 고급 피처 엔지니어링을 적용하고, LightGBM을 사용하여 고정밀 예측 모델을 개발함.</li><li>성과: 160개 팀 중 3위를 수상하고 정확도를 8% 향상함.</li></ul>" }
+                },
+                {
+                    period: "Jan-Dec 2022",
+                    name: { en: "Koh Young Technology Research", kr: "고영테크놀로지 연구" },
+                    role: { en: "Undergraduate Research Assistant (Solo 3rd Place)", kr: "학부 연구 보조 (단독 3위 수상)" },
+                    desc: { en: "<ul class='bullet-list'><li>Action: Designed dynamic experiments to determine optimal wet vs. dry cleaning cycles using Python and DOE to minimize failures in solder paste printing.</li><li>Result: Identified optimal cleaning configuration, recognized with 3rd Place at IISE Technical Paper Competition.</li></ul>", kr: "<ul class='bullet-list'><li>해결: 솔더 페이스트 인쇄 시 실패를 최소화하기 위해 Python 및 DOE를 사용하여 최적의 습식 대 건식 세척 주기를 결정하는 동적 실험을 설계함.</li><li>성과: 최적의 세척 구성을 파악하고 IISE 기술 논문 경진대회에서 3위를 수상함.</li></ul>" }
                 }
             ],
             skills: {
                 en: [
-                    { cat: "Programming", list: "Python, SQL, R, MATLAB, C++, JS" },
-                    { cat: "Backend", list: "FastAPI, MongoDB, RabbitMQ, Docker" },
-                    { cat: "Engineering", list: "SOLIDWORKS, Simio, SPC, DOE" }
+                    { cat: "Programming", list: ["Python", "SQL", "R", "MATLAB", "C/C++", "JS"] },
+                    { cat: "Backend", list: ["FastAPI", "MongoDB", "RabbitMQ", "Docker"] },
+                    { cat: "Engineering", list: ["SOLIDWORKS", "Simio", "SPC", "DOE"] }
                 ],
                 kr: [
-                    { cat: "프로그래밍", list: "Python, SQL, R, MATLAB, C++, JS" },
-                    { cat: "백엔드", list: "FastAPI, MongoDB, RabbitMQ, Docker" },
-                    { cat: "공학 도구", list: "SOLIDWORKS, Simio, SPC, DOE" }
+                    { cat: "프로그래밍", list: ["Python", "SQL", "R", "MATLAB", "C/C++", "JS"] },
+                    { cat: "백엔드", list: ["FastAPI", "MongoDB", "RabbitMQ", "Docker"] },
+                    { cat: "공학 도구", list: ["SOLIDWORKS", "Simio", "SPC", "DOE"] }
                 ]
             }
         };
@@ -220,7 +280,11 @@ layout: null
             // 사이드바 & 소개
             document.getElementById('sidebar-name').textContent = D.info.name[lang];
             document.getElementById('sidebar-role').textContent = D.info.role[lang];
-            document.getElementById('about-text').textContent = D.info.about[lang];
+            
+            // About 텍스트 마크다운 형식 해석 (볼드체만 지원)
+            let aboutText = D.info.about[lang];
+            aboutText = aboutText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            document.getElementById('about-text').innerHTML = aboutText;
             
             // 제목 번역
             const titles = { 't-about':['About','소개'], 't-edu':['Education','학력'], 't-exp':['Experience','경력'], 't-proj':['Projects','프로젝트'], 't-skill':['Skills','기술'] };
@@ -241,19 +305,19 @@ layout: null
                 </div>
             `).join('');
 
-            // 경력 렌더링
+            // 경력 렌더링 (상세 내용 포함)
             document.getElementById('exp-list').innerHTML = D.experience.map(e => `
                 <div class="entry-card">
                     <div class="entry-header">
                         <div class="entry-title">${e.company[lang]}</div>
                         <div class="entry-period">${e.period}</div>
                     </div>
-                    <div class="entry-sub">${e.role[lang]}</div>
-                    <ul class="bullet-list"><li>${e.desc[lang]}</li></ul>
+                    <div class="entry-sub">${e.role[lang]} | ${e.location[lang]}</div>
+                    <div>${e.desc[lang]}</div>
                 </div>
             `).join('');
 
-            // 프로젝트 렌더링
+            // 프로젝트 렌더링 (상세 내용 포함)
             document.getElementById('proj-list').innerHTML = D.projects.map(p => `
                 <div class="entry-card">
                     <div class="entry-header">
@@ -261,15 +325,17 @@ layout: null
                         <div class="entry-period">${p.period}</div>
                     </div>
                     <div class="entry-sub">${p.role[lang]}</div>
-                    <p style="font-size: 14px; color: var(--ink-light);">${p.desc[lang]}</p>
+                    <div>${p.desc[lang]}</div>
                 </div>
             `).join('');
 
-            // 기술 스택 렌더링
+            // 기술 스택 렌더링 (세로 정렬로 변경)
             document.getElementById('skill-list').innerHTML = D.skills[lang].map(s => `
-                <div style="background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
-                    <div style="font-size: 10px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">${s.cat}</div>
-                    <div style="font-size: 13px; font-weight: 500;">${s.list}</div>
+                <div class="skill-category-block">
+                    <span class="skill-category">${s.cat}</span>
+                    <ul class="skill-item-list">
+                        ${s.list.map(item => `<li class="skill-item">${item}</li>`).join('')}
+                    </ul>
                 </div>
             `).join('');
         }
